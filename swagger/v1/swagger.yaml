@@ -1,0 +1,270 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/members/{member_id}/facts":
+    parameters:
+    - name: member_id
+      in: path
+      description: member_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: list facts
+      tags:
+      - Facts
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create fact
+      tags:
+      - Facts
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fact_text
+              - likes
+              properties:
+                fact_text:
+                  type: string
+                likes:
+                  type: integer
+        required: true
+  "/api/v1/members/{member_id}/facts/{fact_id}":
+    parameters:
+    - name: member_id
+      in: path
+      description: member_id
+      required: true
+      schema:
+        type: string
+    - name: fact_id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show fact
+      tags:
+      - Facts
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update fact
+      tags:
+      - Facts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fact_text:
+                  type: string
+                likes:
+                  type: integer
+        required: true
+    put:
+      summary: update fact
+      tags:
+      - Facts
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fact_text:
+                  type: string
+                likes:
+                  type: integer
+        required: true
+    delete:
+      summary: delete fact
+      tags:
+      - Facts
+      responses:
+        '200':
+          description: successful
+  "/api/v1/members":
+    get:
+      summary: list members
+      tags:
+      - Members
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create member
+      tags:
+      - Members
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - first_name
+              - last_name
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+        required: true
+  "/api/v1/members/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show member
+      tags:
+      - Members
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update member
+      tags:
+      - Members
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+    put:
+      summary: update member
+      tags:
+      - Members
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+    delete:
+      summary: delete member
+      tags:
+      - Members
+      responses:
+        '200':
+          description: successful
+  "/users":
+    post:
+      summary: create user
+      tags:
+      - Registrations
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                user:
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+        required: true
+  "/users/sign_in":
+    post:
+      summary: Creates a session
+      tags:
+      - sessions
+      parameters: []
+      responses:
+        '201':
+          description: session established
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+              required:
+              - email
+              - password
+        required: true
+  "/users/sign_out":
+    delete:
+      summary: End user session
+      tags:
+      - sessions
+      responses:
+        '200':
+          description: session ended
+        '401':
+          description: no user logged on
+components:
+  securitySchemes:
+    CSRF_Protection:
+      description: CSRF token
+      type: apiKey
+      name: X-CSRF-Token
+      in: header
+security:
+- CSRF_Protection: []
+servers:
+- url: ''
