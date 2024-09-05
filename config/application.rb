@@ -84,9 +84,9 @@ module SendSessionForLocalHost # We need to be able to send a secure cookie in n
   end 
 end
 
-# class Rack::Session::Abstract::Persisted
-#   prepend SendSessionForLocalHost
-# end
+class Rack::Session::Abstract::Persisted
+  prepend SendSessionForLocalHost
+end
 
 module R7Rest
   class Application < Rails::Application
