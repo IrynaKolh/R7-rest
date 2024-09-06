@@ -153,38 +153,6 @@ function handle_members(event) {
         }
       });
     } else if (event.target === deleteMember) {
-        // let headers = { "Content-Type": "application/json" };
-        // let csrf_cookie = getCookie("CSRF-TOKEN");
-        // if (csrf_cookie) {
-        //   headers["X-CSRF-Token"] = csrf_cookie;
-        // }
-        // fetch(`${members_path}/${memberId2.value}`, {
-        //   method: "DELETE",
-        //   headers: headers,
-        // }).then((response) => {
-        //   if (response.status === 200) {
-        //     response.json().then((data) => {
-        //       resultsDiv.innerHTML = "";
-        //       let parag = document.createElement("P");
-        //       parag.textContent = JSON.stringify(data);
-        //       resultsDiv.appendChild(parag);
-        //     });
-        //   } else {
-        //     response
-        //       .json()
-        //       .then((data) => {
-        //         alert(
-        //           `Return code ${response.status} ${
-        //             response.statusText
-        //           } ${JSON.stringify(data)}`,
-        //         );
-        //       })
-        //       .catch((error) => {
-        //         console.log(error);
-        //         alert(error);
-        //       });
-        //   }
-        // });
         let headers = { "Content-Type": "application/json" };
         let csrf_cookie = getCookie("CSRF-TOKEN");
         if (csrf_cookie) {
@@ -283,7 +251,7 @@ function handle_members(event) {
         }
       });
     } else if (event.target === updateFact) {
-      var dataObject = {
+      let dataObject = {
         member_id: memberId5.value,
         fact_text: factText2.value,
         likes: likes2.value,
@@ -293,13 +261,12 @@ function handle_members(event) {
       if (csrf_cookie) {
         headers["X-CSRF-Token"] = csrf_cookie;
       }
-      console.log(`${members_path}/${memberId5.value}/facts/${factNumber.value}`)
       fetch(`${members_path}/${memberId5.value}/facts/${factNumber.value}`, {
         method: "PUT",
         headers: headers,
         body: JSON.stringify(dataObject),
       }).then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           response.json().then((data) => {
             resultsDiv.innerHTML = "";
             let parag = document.createElement("P");

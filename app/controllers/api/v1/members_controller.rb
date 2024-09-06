@@ -46,6 +46,8 @@ class Api::V1::MembersController < ApplicationController
       if check_access
         @member.destroy
         render json: { message: 'Member record successfully deleted.'}, status: 200
+      else
+        render json: { error: "Member not found" }, status: :not_found
       end
     end
   

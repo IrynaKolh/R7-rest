@@ -40,6 +40,8 @@ gem 'rspec-rails'
 gem 'rexml'
 gem 'rswag'
 
+gem "rack", "2.2.8.1"
+gem "rack-session", "1.0.2"
 gem "rack-cors"
 
 group :development, :test do
